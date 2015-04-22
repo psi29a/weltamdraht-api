@@ -1,7 +1,7 @@
 namespace py weltamdraht
 namespace py.twisted weltamdraht
 
-const i32 API_VERSION = 1
+const i16 API_VERSION = 1
 
 struct WAD_Signature {
     1: i32 unique_id;
@@ -25,10 +25,11 @@ service WeltamDraht{
     )
 
     /**
-     * Get Spatial Field Location - returns Location
+     * Get Spatial Field Location - returns WAD_Spatial_Location
      */
     WAD_Spatial_Location getSpatialLocation(
         1: WAD_Signature signature
+        2: i64 object_id
     )
 
     /**
@@ -36,5 +37,15 @@ service WeltamDraht{
      */
     bool setSpatialLocation(
         1: WAD_Signature signature
+        2: i64 object_id
+    )
+
+    /**
+     * Get Objects At Field Location - returns Set
+     */
+    set<i64> getObjectsAtSpatialLocation(
+        1: WAD_Signature signature
+        2: WAD_Spatial_Location spatial_location
+        3: i16 radius
     )
 }
